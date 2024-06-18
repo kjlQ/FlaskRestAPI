@@ -37,6 +37,15 @@ def delete_item():
          return {"message":"Item not found"}, 404
     return {"message":"Item deleted"}, 200
 
+@app.delete("/item")
+def delete_store():
+    item_data = request.get_json()
+    try:
+        del stores[item_data["uuid"]]
+    except KeyError:
+         return {"message":"Store not found"}, 404
+    return {"message":"Store deleted"}, 200
+
 
 @app.put("/item/<string:item_id>")
 def update_item(item_id):
